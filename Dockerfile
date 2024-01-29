@@ -1,26 +1,30 @@
-FROM ubuntu:xenial
 
-ENV GRADLE_VERSION 5.6.4
+#  Docker Image to build proxl-web  
+
+#   if existing command not work to build docker image, see https://docs.docker.com/go/buildx/
+
+FROM ubuntu:jammy
+
+# 'jammy' is Ubuntu 22.04 
+
+# Gradle is downloaded via Gradle Wrapper in Limelight Core so NO need to add here
 
 RUN apt-get update
-RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install openjdk-8-jdk wget curl locales ant unzip
+RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install openjdk-21-jdk wget curl locales ant unzip
+
+#   Uncomment during development to see default java version
+# RUN java -version
 
 # Configure locale to UTF-8
 RUN locale-gen en_US.UTF-8
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
-# Setup certificates in openjdk-8
-RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
+#  https://nodejs.org/en/about/previous-releases
 
-# Set path
-ENV PATH ${PATH}:/usr/local/gradle-$GRADLE_VERSION/bin
+#   * https://deb.nodesource.com/setup_20.x — Node.js 20 "Iron" (current)
 
 # Install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
-    npm install --global npm@7
-
-# Install gradle
-RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip && \
-    unzip gradle-$GRADLE_VERSION-bin.zip && \
-    rm -f gradle-$GRADLE_VERSION-bin.zip
+    npm install --global npm@10.3.0
+    
