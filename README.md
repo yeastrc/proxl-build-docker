@@ -37,7 +37,8 @@ docker image build -t local-build-image/build-proxl ./
 ## Building proxl
 
 Run from the **root of the proxl source tree** (the directory containing `ant__build_all_proxl.xml`).
-The command below builds as your own user so all generated files are owned by you instead of root:
+The command below uses the published image and builds as your own user so all generated files are
+owned by you instead of root:
 
 ```
 docker run --rm -it \
@@ -45,8 +46,11 @@ docker run --rm -it \
   -v "$(pwd)":"$(pwd)" -w "$(pwd)" \
   --env HOME=. \
   --entrypoint ant \
-  local-build-image/build-proxl -f ant__build_all_proxl.xml
+  ghcr.io/yeastrc/proxl-build-docker:latest -f ant__build_all_proxl.xml
 ```
+
+To build with a locally built image instead, replace
+`ghcr.io/yeastrc/proxl-build-docker:latest` with `local-build-image/build-proxl`.
 
 - `--user $(id -u):$(id -g)` runs the build as your UID/GID, so all output is owned by you.
 - `-v "$(pwd)":"$(pwd)" -w "$(pwd)"` mounts your source at the same path inside and out, so artifacts land in your tree.
@@ -62,10 +66,8 @@ docker run --rm -it \
   -v ~/.proxl-build-home:/build-home \
   --env HOME=/build-home \
   --entrypoint ant \
-  local-build-image/build-proxl -f ant__build_all_proxl.xml
+  ghcr.io/yeastrc/proxl-build-docker:latest -f ant__build_all_proxl.xml
 ```
-
-(Substitute the GHCR image name from above for `local-build-image/build-proxl` to build with the published image instead of a locally built one.)
 
 ## Continuous integration
 
