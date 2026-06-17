@@ -11,17 +11,19 @@ The image bundles the proxl build toolchain:
 
 ## Using the prebuilt image
 
-Published images are available (publicly) from GitHub Container Registry:
+Published images are available (publicly) from GitHub Container Registry. Pull
+`:latest` to always track the newest release:
 
 ```
-docker pull ghcr.io/yeastrc/proxl-build-docker:2.0.0
+docker pull ghcr.io/yeastrc/proxl-build-docker:latest
 ```
 
-`2.0.0` is the current release. You can also pull `:latest`, or a less specific
-version tag (`:2`, `:2.0`). A new versioned tag is published for each GitHub release.
+`:latest` is republished automatically with each GitHub release. To pin to a
+specific version instead, use a release tag — e.g. `:2.0.0`, or a less specific
+`:2` / `:2.0`.
 
 To build proxl with the published image instead of a locally built one, substitute
-`ghcr.io/yeastrc/proxl-build-docker:2.0.0` for `local-build-image/build-proxl` in the
+`ghcr.io/yeastrc/proxl-build-docker:latest` for `local-build-image/build-proxl` in the
 build commands below.
 
 ## Building the image locally
