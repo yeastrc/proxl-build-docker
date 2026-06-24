@@ -6,7 +6,7 @@ The image bundles the proxl build toolchain:
 
 - Ubuntu 24.04 LTS
 - Eclipse Temurin JDK 25 (Gradle daemon + Java 25 projects) and JDK 8 (`proxl_submit_import`, which stays on Java 8)
-- Node.js 20 + npm 10 (pinned to Node 20 because the web build still uses webpack 4)
+- Node.js 24 + npm 11
 - Ant, Gradle (via the Gradle Wrapper in the proxl source)
 
 ## Using the prebuilt image

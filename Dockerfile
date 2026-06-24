@@ -45,10 +45,9 @@ RUN locale-gen en_US.UTF-8
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 #  https://nodejs.org/en/about/previous-releases
-#   * https://deb.nodesource.com/setup_20.x — Node.js 20 "Iron"
-#   Pinned to Node 20: the web build still uses webpack 4.
+#   * https://deb.nodesource.com/setup_24.x — Node.js 24
 
 # Install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_24.x | bash - && \
     apt-get install -y nodejs && \
-    npm install --global npm@10.3.0
+    npm install --global npm@11.12.1
